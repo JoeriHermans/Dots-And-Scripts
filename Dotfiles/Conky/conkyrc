@@ -1,0 +1,94 @@
+# Conky, a system monitor, based on torsmo
+#
+# Any original torsmo code is licensed under the BSD license
+#
+# All code written since the fork of torsmo is licensed under the GPL
+#
+# Please see COPYING for details
+#
+# Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
+# Copyright (c) 2005-2010 Brenden Matthews, Philip Kovacs, et. al. (see AUTHORS)
+# All rights reserved.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+alignment top_right
+background no
+border_width 10
+cpu_avg_samples 2
+default_color white
+default_bar_size 100 5
+default_outline_color white
+default_shade_color white
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+use_xft yes
+xftfont snap:size=8
+gap_x 25
+gap_y 40
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+own_window yes
+own_window_colour 111111
+own_window_class Conky
+own_window_type desktop
+stippled_borders 0
+update_interval 1.0
+uppercase no
+use_spacer none
+show_graph_scale no
+show_graph_range no
+minimum_size 260 0
+draw_graph_borders no
+
+TEXT
+pr0lix system status.
+${hr 2}
+
+${color grey}Kernel${alignr}$color$kernel
+${color grey}Battery${alignr}$color${exec /home/joeri/Scripts/bat_perc.sh}% ${execbar /home/joeri/Scripts/bat_perc.sh}
+
+Central Processing Unit.
+${hr 2}
+${cpugraph 111111 ffffff}
+${color grey}CPU0$color${alignr}${cpu cpu0}% ${cpubar cpu0 5,100}
+${color grey}CPU1$color${alignr}${cpu cpu1}% ${cpubar cpu1 5,100}
+
+Memory.
+${hr 2}
+${memgraph 111111 ffffff}
+$color$mem / $memmax$color${alignr}$memperc% ${membar 5,100}
+
+Filesystem.
+${hr 2}
+
+${color grey}Root${alignr}$color${fs_used /} / ${fs_size /} ${fs_bar 5,100 /}
+${color grey}Home${alignr}$color${fs_used /home} / ${fs_size /home} ${fs_bar 5,100 /home}
+${color grey}Swap${alignr}$color$swap / $swapmax ${swapbar 5,100}
+
+Wireless Network.
+${hr 2}
+
+${color grey}ESSID${alignr}$color${wireless_essid eth1}
+${color grey}Connection quality${alignr}$color${wireless_link_qual_perc eth1}% ${wireless_link_bar 5,100 eth1}
+${color grey}Network address${alignr}$color${addr eth1}
+${color grey}Downspeed${alignr}$color${downspeedf eth1} KiB
+${downspeedgraph eth1 20,0 111111 ffffff}
+${color grey}Upspeed${alignr}$color${upspeedf eth1} KiB
+${upspeedgraph eth1 20,0 111111 ffffff}
